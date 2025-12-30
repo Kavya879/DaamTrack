@@ -36,10 +36,9 @@ export default function Home() {
           <div className="flex items-center gap-3">
             <Image
               src={"/logo.jpg"}
-              width={600}
-              height={200}
+              width={65}
+              height={100}
               alt="DaamTrack"
-              className="h-10 w-auto"
             />
           </div>
 
