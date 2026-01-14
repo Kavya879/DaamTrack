@@ -44,6 +44,8 @@ const ProductForm = ({ user }) => {
           </Button>
         </div>
       </form>
+
+      {/* if not login ask to auth */}
     </>
   );
 };

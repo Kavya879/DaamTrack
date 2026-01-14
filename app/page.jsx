@@ -1,9 +1,18 @@
+import AuthButton from "@/components/ui/AuthButton";
 import { Button } from "@/components/ui/button";
 import ProductForm from "@/components/ui/ProductForm";
+import { createClient } from "@/utils/supabase/server";
 import { Bell, LogIn, Rabbit, Shield } from "lucide-react";
 import Image from "next/image";
 
-const user = null;
+
+export default async function Home() {
+
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
 const products = [];
 
 const FEATURES = [
@@ -27,7 +36,7 @@ const FEATURES = [
   },
 ];
 
-export default function Home() {
+
   return (
     <main className="min-h-screen bg-linear-to-br from-amber-50 via-white to-amber-50">
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-10">
@@ -39,13 +48,11 @@ export default function Home() {
               width={65}
               height={100}
               alt="DaamTrack"
+              className="h-10 w-auto"
             />
           </div>
 
-          <Button className="bg-amber-500 hover:bg-amber-600 text-white">
-            <LogIn className="w-4 h-4" />
-            Sign In
-          </Button>
+        <AuthButton user={user}/>
         </div>
       </header>
 
