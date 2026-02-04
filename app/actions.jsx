@@ -101,3 +101,55 @@ export async function addProduct(formData) {
     return { error: error.message || "Failed to  add product" };
   }
 }
+
+
+export async function deleteProduct(productId) {
+  try {
+    const supabase = await createClient();
+    const { error } = await supabase
+      .from("products")
+      .delete()
+      .eq("id", productId);
+
+    if (error) throw error;
+
+    revalidatePath("/");
+    return { success: true };
+  } catch (error) {
+    return { error: error.message };
+  }
+}
+
+
+export async function getProducts() {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("products")
+      .select("*")
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Get products error:", error);
+    return [];
+  }
+}
+
+export async function getPriceHistory(productId) {
+  try {
+    const supabase = await createClient();
+    const { data, error } = await supabase
+      .from("price_history")
+      .select("*")
+      .eq("product_id", productId)
+      .order("checked_at", { ascending: true });
+
+    if (error) throw error;
+    return data || [];
+  } catch (error) {
+    console.error("Get price history error:", error);
+    return [];
+  }
+}
