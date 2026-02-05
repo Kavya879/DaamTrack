@@ -1,22 +1,15 @@
-
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog"
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { createClient } from "@/utils/supabase/client";
-import { Input } from "@/components/ui/input"
-import { Label } from "@/components/ui/label"
 
-export function AuthModal({isOpen , onClose}) { 
-
-     const supabase = createClient();
+export function AuthModal({ isOpen, onClose }) {
+  const supabase = createClient();
 
   const handleGoogleLogin = async () => {
     const { origin } = window.location;
@@ -28,22 +21,26 @@ export function AuthModal({isOpen , onClose}) {
       },
     });
   };
+
   return (
-     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="sm:max-w-md">
+    <Dialog open={isOpen} onOpenChange={onClose}>
+      <DialogContent className="sm:max-w-md bg-white border border-slate-200">
         <DialogHeader>
-          <DialogTitle>Sign in to continue</DialogTitle>
-          <DialogDescription>
-            Track product prices and get alerts on price drops
+          <DialogTitle className="text-lg font-semibold text-slate-900">
+            Sign in to track prices
+          </DialogTitle>
+          <DialogDescription className="text-slate-600">
+            Add products, monitor price changes, and get notified when prices
+            drop.
           </DialogDescription>
         </DialogHeader>
 
-        <div className="flex flex-col gap-4 py-4">
+        <div className="pt-4">
           <Button
             onClick={handleGoogleLogin}
             variant="outline"
-            className="w-full gap-2"
             size="lg"
+            className="w-full gap-3 border-slate-300 hover:bg-slate-50 text-slate-800"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
               <path
@@ -65,8 +62,14 @@ export function AuthModal({isOpen , onClose}) {
             </svg>
             Continue with Google
           </Button>
+
+          <p className="mt-4 text-xs text-slate-500 text-center">
+            We only use your account to save tracked products.
+            <br />
+            No spam. No ads.
+          </p>
         </div>
       </DialogContent>
     </Dialog>
-  )
+  );
 }

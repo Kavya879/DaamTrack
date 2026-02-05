@@ -23,7 +23,7 @@ export default function PriceChart({ productId }) {
 
       const chartData = history.map((item) => ({
         date: new Date(item.checked_at).toLocaleDateString(),
-        price: parseFloat(item.price),
+        price: Number(item.price),
       }));
 
       setData(chartData);
@@ -35,45 +35,68 @@ export default function PriceChart({ productId }) {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center py-8 text-gray-500 w-full">
-        <Loader2 className="w-5 h-5 animate-spin mr-2" />
-        Loading chart...
+      <div className="flex items-center justify-center py-10 text-slate-500 w-full">
+        <Loader2 className="w-4 h-4 animate-spin mr-2" />
+        Loading price history…
       </div>
     );
   }
 
   if (data.length === 0) {
     return (
-      <div className="text-center py-8 text-gray-500 w-full">
-        No price history yet. Check back after the first daily update!
+      <div className="text-center py-10 text-slate-500 w-full text-sm">
+        No price history yet.
+        <br />
+        We’ll start tracking after the first update.
       </div>
     );
   }
 
   return (
     <div className="w-full">
-      <h4 className="text-sm font-semibold mb-4 text-gray-700">
-        Price History
+      <h4 className="text-sm font-medium mb-3 text-slate-700">
+        Price history
       </h4>
-      <ResponsiveContainer width="100%" height={200}>
+
+      <ResponsiveContainer width="100%" height={220}>
         <LineChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-          <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="#9ca3af" />
-          <YAxis tick={{ fontSize: 12 }} stroke="#9ca3af" />
-          <Tooltip
-            contentStyle={{
-              backgroundColor: "white",
-              border: "1px solid #e5e7eb",
-              borderRadius: "6px",
-            }}
+          <CartesianGrid stroke="#f1f5f9" vertical={false} />
+
+          <XAxis
+            dataKey="date"
+            tick={{ fontSize: 12 }}
+            stroke="#94a3b8"
+            tickLine={false}
+            axisLine={false}
           />
+
+          <YAxis
+            tick={{ fontSize: 12 }}
+            stroke="#94a3b8"
+            tickLine={false}
+            axisLine={false}
+            width={40}
+          />
+
+          <Tooltip
+            cursor={{ stroke: "#e2e8f0", strokeWidth: 1 }}
+            contentStyle={{
+              backgroundColor: "#ffffff",
+              border: "1px solid #e2e8f0",
+              borderRadius: "8px",
+              fontSize: "12px",
+              color: "#0f172a",
+            }}
+            labelStyle={{ color: "#64748b" }}
+          />
+
           <Line
             type="monotone"
             dataKey="price"
-            stroke="#FA5D19"
+            stroke="#4f46e5" // indigo
             strokeWidth={2}
-            dot={{ fill: "#FA5D19", r: 4 }}
-            activeDot={{ r: 6 }}
+            dot={false}
+            activeDot={{ r: 5, fill: "#4f46e5" }}
           />
         </LineChart>
       </ResponsiveContainer>
