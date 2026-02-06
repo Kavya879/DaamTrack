@@ -1,36 +1,125 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+<p align="center">
+  <img src="https://raw.githubusercontent.com/Kavya879/DaamTrack/main/public/logo.jpg" alt="DaamTrack Logo" width="180"/>
+</p>
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+<p align="center">
+  A full-stack product price tracker that watches prices for you — so you don’t have to.
+</p>
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+##   What is DaamTrack?
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+**DaamTrack** is a full-stack web application that lets users track product prices from online stores and get notified when prices change.
 
-## Learn More
+You paste a product link, DaamTrack extracts the price, stores it, and **automatically checks the price every day at 9 AM**. If the price drops (or changes), users get notified via email.
 
-To learn more about Next.js, take a look at the following resources:
+Built with modern tools, clean UI, and real-world automation in mind.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+##  Features
 
-## Deploy on Vercel
+- 🔗 Track products using just a URL  
+-  Automatic price scraping using Firecrawl  
+-  Daily cron job runs **every day at 9 AM**  
+- 📉 Detects price changes over time  
+-  Email notifications using Resend  
+-  Secure database with Supabase  
+-  Clean UI built with Shadcn UI  
+- ⚡ Fast and SEO-friendly with Next.js  
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+##  How It Works
+
+1. User adds a product URL  
+2. Firecrawl scrapes the product name, price, and currency  
+3. Data is stored in Supabase  
+4. A cron job runs every day at **9 AM**  
+5. If the price changes, an email notification is sent  
+
+Simple, automated, and reliable.
+
+---
+
+##  Tech Stack
+
+**Frontend**
+- Next.js 
+- Shadcn UI
+- Tailwind CSS
+
+**Backend**
+- Next.js 
+- Supabase (PostgreSQL)
+- Firecrawl (Web scraping)
+- Resend (Email service)
+
+**Automation**
+- Cron Jobs (daily at 9 AM)
+
+---
+
+##  Cron Job Schedule
+
+The price-check cron job runs:
+
+```text
+Every day at 9:00 AM
+````
+
+It:
+
+* Fetches all tracked products
+* Re-scrapes current prices
+* Compares with stored prices
+* Triggers emails if changes are detected
+
+---
+
+## 📸 Screenshots
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Kavya879/DaamTrack/main/public/screenshots/home.png" width="580" alt="Home Page" />
+  <br />
+  <strong>Home Page</strong>
+</div>
+
+<br />
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Kavya879/DaamTrack/main/public/screenshots/tracker.png" width="580" alt="Tracker" />
+  <br />
+  <strong>Tracker</strong>
+</div>
+
+<br />
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/Kavya879/DaamTrack/main/public/screenshots/mail.png" width="580" alt="Mail" />
+  <br />
+  <strong>Sample Mail</strong>
+</div>
+
+---
+
+##  Contributing 🤝
+
+Pull requests are welcome.
+If you have ideas, improvements, or bug fixes — feel free to open an issue or PR.
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License**.
+
+---
+
+
+
+
+
