@@ -1,7 +1,7 @@
-import { sendPriceDropAlert } from "@/lib/email";
-import { scrapeProduct } from "@/lib/firecrawl";
-import { createClient } from "@/utils/supabase/server";
 import { NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { scrapeProduct } from "@/lib/firecrawl";
+import { sendPriceDropAlert } from "@/lib/email";
 
 export async function GET() {
     return NextResponse.json(
@@ -22,9 +22,16 @@ export async function POST(request) {
 
     // Use service role to bypass Role Level Security
     const supabase = createClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL,
-      process.env.SUPABASE_SERVICE_ROLE_KEY
-    );
+  process.env.NEXT_PUBLIC_SUPABASE_URL,
+  process.env.SUPABASE_SERVICE_ROLE_KEY,
+  {
+    auth: {
+      autoRefreshToken: false,
+      persistSession: false,
+    },
+  }
+);
+
 
     const { data: products, error: productsError } = await supabase
       .from("products")
