@@ -1,4 +1,4 @@
-FROM node:20
+FROM node:22
 
 WORKDIR /app
 
@@ -8,8 +8,17 @@ RUN npm install
 
 COPY . .
 
+ENV FIRECRAWL_API_KEY=dummy_key
+ENV NEXT_PUBLIC_SUPABASE_URL=dummy_url
+ENV NEXT_PUBLIC_SUPABASE_ANON_KEY=dummy_key
+ENV NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=dummy_key
+ENV SUPABASE_SERVICE_ROLE_KEY=dummy_key
+ENV CRON_SECRET=dummy_secret
+ENV RESEND_API_KEY=dummy_key
+ENV RESEND_FROM_EMAIL=test@test.com
+
 RUN npm run build
 
 EXPOSE 3000
 
-CMD ["npm","start"]
+CMD ["npm", "start"]
