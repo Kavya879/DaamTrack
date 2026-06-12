@@ -13,19 +13,19 @@ const ProductForm = ({ user }) => {
   const [loading, setLoading] = useState(false);
   const [showAuthModal, setShowAuthModal] = useState(false);
 
-  const handleSubmit =  async (e)  => {
-     e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
     if (!user) {
       setShowAuthModal(true);
       return;
     }
 
-     setLoading(true);
-      const formData = new FormData();
+    setLoading(true);
+    const formData = new FormData();
     formData.append("url", url);
     const result = await addProduct(formData);
-    
+
     if (result.error) {
       toast.error(result.error);
     } else {
@@ -53,7 +53,7 @@ const ProductForm = ({ user }) => {
           <Button
             type="submit"
             disabled={loading}
-            className="bg-violet-500 hover:bg-violet-600 h-10 sm:h-12 px-8"
+            className="bg-emerald-600 hover:bg-emerald-700 text-white h-10 sm:h-12 px-8"
             size="lg"
           >
             {loading ? (
